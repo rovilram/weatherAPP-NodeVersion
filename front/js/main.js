@@ -13,14 +13,18 @@ const printHeader = (headerText, d) => {
 
 }
 
-const printMap = (lat, lon, mapDiv) => {
+const printMap = (lat, lon, mapDiv,weatherPIC) => {
 
-    const mymap = L.map(mapDiv).setView([lat, lon], 15);
+    const mymap = L.map(mapDiv).setView([lat, lon], 10);
     L.marker([lat, lon]).addTo(mymap)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(mymap);
 
+    console.log(weatherPIC)
+    
+    const overlay = new L.ImageOverlay(  `http://openweathermap.org/img/wn/${weatherPIC}@4x.png`   , [[lat-.075,lon-.1], [lat+0.075,lon+0.1]], {opacity: 0.75,});
+    mymap.addLayer(overlay);
 
 }
 
@@ -205,7 +209,9 @@ const printWeather = (weatherJSON, d) => {
     icon.setAttribute("class", "icon");
 
     actualIcon.appendChild(icon);
-    icon.setAttribute("src", `http://openweathermap.org/img/wn/${weatherJSON.current.weather[0].icon}@4x.png`)
+    icon.setAttribute("src", `http://openweathermap.org/img/wn/${weatherJSON.current.weather[0].icon}@4x.png`);
+    icon.setAttribute("alt", "clear sky");
+    icon.setAttribute("title", "clear sky");
 
 
     const chartWrapper = d.createElement("div");
@@ -241,7 +247,7 @@ const main = async (d) => {
     mapDiv = d.createElement("div");
     mapDiv.setAttribute("id", "mapDiv")
     d.body.appendChild(mapDiv)
-    printMap(position.coords.latitude, position.coords.longitude, "mapDiv");
+    printMap(position.coords.latitude, position.coords.longitude, "mapDiv",weatherJSON.current.weather[0].icon);
     weatherDiv = d.createElement("div");
     weatherDiv.setAttribute("class", "weatherDiv");
     d.body.appendChild(weatherDiv);
