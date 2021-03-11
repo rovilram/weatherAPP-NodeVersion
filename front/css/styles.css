@@ -1,0 +1,46 @@
+body {
+    background-color:lightskyblue;
+    font-family: 'Teko', sans-serif;
+    font-size:1.25rem;
+}
+#mapDiv {
+    height: 40vh;
+}
+h1 {
+    text-align: center;
+}
+#mapDiv {
+    border-radius: 10px;
+}
+.chartDiv {
+    border-radius: 10px;
+    background-color: #CCC;
+}
+
+.actualWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #CCC;
+    border-radius: 10px;
+}
+
+.actualValWrapper {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+}
+
+.actualValWrapper>div {
+    margin:10px;
+}
+
+.actualTemp {
+    display: flex;
+
+}
+.actualPress{
+    display: flex;
+    
+}
